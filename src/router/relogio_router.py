@@ -14,13 +14,11 @@ async def relogio_list(request: Request):
 
     async with httpx.AsyncClient() as client:
         try:
-            # Faz a requisição GET
             response = await client.get(url)
 
             # Levanta uma exceção caso o status code seja de erro (ex: 404, 500)
             response.raise_for_status()
 
-            # Retorna os dados em formato JSON convertidos automaticamente
             res_dados = response.json()
 
         except httpx.HTTPStatusError as e:
@@ -38,7 +36,7 @@ async def relogio_list(request: Request):
         request=request,
         name="relogio_view/index.html",
         context={
-            "titulo": "Dashboard",
+            "titulo": "Relogio",
             "active_page": "relogio",
             "data": res_dados,
         },
@@ -62,8 +60,73 @@ async def create_relogio(
 
     async with httpx.AsyncClient() as client:
         try:
-            # Faz a requisição GET
             response = await client.post(url=url, json=payload)
+            response.raise_for_status()
+
+        except httpx.HTTPStatusError as e:
+            print(f"Erro HTTP: {e.response.status_code} - {e.response.text}")
+
+        except httpx.RequestError as e:
+            print(f"Erro de conexão: {e}")
+
+        finally:
+            return RedirectResponse(
+                url="/relogio/", status_code=status.HTTP_303_SEE_OTHER
+            )
+
+
+#
+#
+#
+#
+#
+#
+@router.post("/edit", name="relogio_edit")
+async def update_relogio(
+    request: Request,
+    id: str = Form(...),
+    nome: str = Form(...),
+    codigo: str = Form(...),
+):
+
+    url = f"http://127.0.0.1:8080/relogio/{id}"
+
+    payload = {"nome": nome, "codigo": codigo}
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.put(url=url, json=payload)
+            response.raise_for_status()
+
+        except httpx.HTTPStatusError as e:
+            print(f"Erro HTTP: {e.response.status_code} - {e.response.text}")
+
+        except httpx.RequestError as e:
+            print(f"Erro de conexão: {e}")
+
+        finally:
+            return RedirectResponse(
+                url="/relogio/", status_code=status.HTTP_303_SEE_OTHER
+            )
+
+
+#
+#
+#
+#
+#
+#
+@router.post("/del", name="relogio_del")
+async def delete_relogio(
+    request: Request,
+    id: str = Form(...),
+):
+
+    url = f"http://127.0.0.1:8080/relogio/{id}"
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.delete(url=url)
             response.raise_for_status()
 
         except httpx.HTTPStatusError as e:

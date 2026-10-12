@@ -40,9 +40,8 @@
             data-bs-toggle="modal"
             data-bs-target="#relogio_add_modal"
           >
-            Adicionar Relogio
+            Add Relogio
           </button>
-          {% include 'relogio_view/addRelogio_model.html' %}
           <!--  -->
         </div>
       </div>
@@ -56,7 +55,7 @@
               <tr>
                 <th>Nome</th>
                 <th>Código</th>
-                <th>Operação</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -65,7 +64,31 @@
                 <td>{{relogio["nome"]}}</td>
                 <td>{{relogio["codigo"]}}</td>
                 <td>
-                  <span class="badge bg-success">Active</span>
+                  <!-- MODAL EDIT -->
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-warning rounded-pill"
+                    data-bs-toggle="modal"
+                    data-bs-target="#relogio_edit_modal"
+                    data-bs-id="{{ relogio['id'] }}"
+                    data-bs-nome="{{ relogio['nome'] }}"
+                    data-bs-codigo="{{ relogio['codigo'] }}"
+                  >
+                    Edit
+                  </button>
+
+                  <!--/ MODAL EDIT -->
+                  <!-- MODAL Excluir -->
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-danger rounded-pill"
+                    data-bs-toggle="modal"
+                    data-bs-target="#relogio_del_modal"
+                    data-bs-id="{{ relogio['id'] }}"
+                  >
+                    Excluir
+                  </button>
+                  <!--/ MODAL Excluir -->
                 </td>
               </tr>
               {% endfor %}
@@ -75,8 +98,15 @@
       </div>
     </section>
   </div>
-
+  <!--  -->
+  {% include 'relogio_view/add_relogio_model.html' %}
+  <!--  -->
+  {% include 'relogio_view/edit_relogio_model.html' %}
+  <!--  -->
+  {% include 'relogio_view/del_relogio_model.html' %}
+  <!--  -->
   {% include 'footer.html' %}
+  <!--  -->
 </div>
 <script src="/static/vendors/simple-datatables/simple-datatables.js"></script>
 <script>

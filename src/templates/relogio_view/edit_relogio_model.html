@@ -1,0 +1,117 @@
+<div
+  class="modal fade text-left"
+  id="relogio_edit_modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel33"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+    role="document"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel33">Atualizar Relogio</h4>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i data-feather="x"></i>
+        </button>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <!-- FORM -->
+          <form
+            method="POST"
+            action="{{ url_for('relogio_edit') }}"
+            class="form form-vertical"
+          >
+            <!-- ID -->
+            <input type="hidden" id="edit_id_id" name="id" />
+            <!--  -->
+            <div class="form-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="first-name-vertical">Nome</label>
+                    <input
+                      type="text"
+                      id="edit_id_nome"
+                      class="form-control"
+                      name="nome"
+                      placeholder="Casa"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="email-id-vertical">Codigo</label>
+                    <input
+                      type="number"
+                      id="edit_id_codigo"
+                      class="form-control"
+                      name="codigo"
+                      placeholder="0000000"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary me-1 mb-1">
+                    Adicionar
+                  </button>
+                  <button
+                    type="reset"
+                    class="btn btn-light-secondary me-1 mb-1"
+                  >
+                    Limpar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-light-secondary me-1 mb-1"
+                    data-bs-dismiss="modal"
+                  >
+                    <span class="d-none d-sm-block">Close</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!--/ FORM -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var relogioEditModal = document.getElementById("relogio_edit_modal");
+
+    if (relogioEditModal) {
+      relogioEditModal.addEventListener("show.bs.modal", function (event) {
+        // Botão que acionou o modal
+        var button = event.relatedTarget;
+
+        // Extrai os dados dos atributos data-bs-*
+        var id = button.getAttribute("data-bs-id");
+        var nome = button.getAttribute("data-bs-nome");
+        var codigo = button.getAttribute("data-bs-codigo");
+
+        // Seleciona os inputs dentro do modal
+        var inputId = relogioEditModal.querySelector("#edit_id_id");
+        var inputNome = relogioEditModal.querySelector("#edit_id_nome");
+        var inputCodigo = relogioEditModal.querySelector("#edit_id_codigo");
+
+        // Atribui os valores aos inputs do modal
+        inputId.value = id;
+        inputNome.value = nome;
+        inputCodigo.value = codigo;
+      });
+    }
+  });
+</script>
