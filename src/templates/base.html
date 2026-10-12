@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{titulo}}</title>
+
+    <link rel="preconnect" href="https://fonts.g/static.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="/static/vendors/iconly/bold.css" />
+
+    <link
+      rel="stylesheet"
+      href="/static/vendors/perfect-scrollbar/perfect-scrollbar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/static/vendors/bootstrap-icons/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <link
+      rel="shortcut icon"
+      href="/static/images/favicon.svg"
+      type="image/x-icon"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+          <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+              <div class="logo">
+                <a href="{{ url_for('dashboard') }}"
+                  ><img src="/static/images/logo/logo.png" alt="Logo" srcset=""
+                /></a>
+              </div>
+              <div class="toggler">
+                <a href="#" class="sidebar-hide d-xl-none d-block"
+                  ><i class="bi bi-x bi-middle"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="sidebar-menu">
+            <ul class="menu">
+              <li class="sidebar-title">Menu</li>
+
+              <li
+                class="sidebar-item {{ 'active' if active_page == 'dashboard' else '' }}"
+              >
+                <a href="{{ url_for('dashboard') }}" class="sidebar-link">
+                  <i class="bi bi-clipboard-data"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li
+                class="sidebar-item {{ 'active' if active_page == 'relogio' else '' }}"
+              >
+                <a href="{{ url_for('relogio') }}" class="sidebar-link">
+                  <i class="bi bi-speedometer2"></i>
+                  <span>Relogio</span>
+                </a>
+              </li>
+              <li
+                class="sidebar-item {{ 'active' if active_page == 'itens' else '' }}"
+              >
+                <a href="#" class="sidebar-link">
+                  <i class="bi bi-diagram-2"></i>
+                  <span>Itens</span>
+                </a>
+              </li>
+              <li
+                class="sidebar-item {{ 'active' if active_page == 'fatura' else '' }}"
+              >
+                <a href="#" class="sidebar-link">
+                  <i class="bi bi-wallet2"></i>
+                  <span>Fatura</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <button class="sidebar-toggler btn x">
+            <i data-feather="x"></i>
+          </button>
+        </div>
+      </div>
+      <!-- MAIN -->
+      {% block conteudo %} {% endblock %}
+      <!--/ MAIN -->
+    </div>
+    <script src="/static/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/static/vendors/apexcharts/apexcharts.js"></script>
+    <script src="/static/js/pages/dashboard.js"></script>
+
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
